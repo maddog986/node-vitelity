@@ -1,0 +1,32 @@
+{
+  "name": "node-vitelity",
+  "version": "1.0.1",
+  "description": "Vitelity Node API Client",
+  "author": {
+    "name": "Drew Gauderman",
+    "email": "drew@dpg.host",
+    "url": "https://github.com/maddog986"
+  },
+  "homepage": "https://github.com/maddog986/node-vitelity",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/maddog986/node-vitelity.git"
+  },
+  "bugs": {
+    "url": "https://github.com/maddog986/node-vitelity/issues"
+  },
+  "license": "MIT",
+  "main": "./vitelity.js",
+  "scripts": {
+    "test": "nodemon test/index.js localhost 8080"
+  },
+  "keywords": ["vitelity"],
+  "dependencies": {
+    "request": "2.88.0",
+    "xml2json": "0.11.2"
+  },
+  "devDependencies": {
+    "@types/request": "2.48.1",
+    "nodemon": "1.18.10"
+  }
+}
