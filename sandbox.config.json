@@ -1,3 +1,6 @@
 {
-  "template": "node"
+  "template": "node",
+  "hardReloadOnChange": true,
+  "infiniteLoopProtection": true,
+  "view": "console"
 }

@@ -41,7 +41,43 @@ module.exports = class Vitelity {
       }
     };
 
-    return new Promise((res, rej) => request(options, (e, r) => (e ? rej(e) : r.body.error ? rej(r.body.error) : res(xmlParser.toJson(r.body, { object: true }).content))));
+    return new Promise((res, rej) =>
+      request(options, (e, r) => {
+        if (e) return rej(e);
+
+        try {
+          const jsonBody = xmlParser.toJson(r.body, {
+            object: true
+          }).content;
+
+          //capture error messages from Vitelity
+          if (jsonBody.status === 'fail') {
+            return rej(jsonBody.error);
+          }
+
+          //get main keys to figure out how to return the info
+          const keys = Object.keys(jsonBody);
+
+          //skips first "status" object and straight to the content.
+          if (keys.length === 2) {
+            const secondKeys = Object.keys(jsonBody[keys[1]]);
+
+            //skips to the first row values
+            if (secondKeys.length === 1) {
+              return res(jsonBody[keys[1]][secondKeys[0]]);
+            }
+
+            //returns first row
+            res(jsonBody[keys[1]]);
+          }
+
+          //return everything
+          res(jsonBody);
+        } catch (err) {
+          rej(err);
+        }
+      })
+    );
   }
 
   //get something

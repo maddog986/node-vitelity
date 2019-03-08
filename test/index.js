@@ -12,14 +12,19 @@ const vClient = new Vitelity({
   password: process.env.PASSWORD
 });
 
-//get all subaccounts
+//get all subaccounts example
 vClient
-  .call('subaccounts', { do: 'list' })
-  .then(response => console.log('subaccounts:', response.subaccounts.subaccount))
+  .call('subaccounts', {
+    do: 'list'
+  })
+  .then(response => console.log('subaccounts:', response))
   .catch(err => console.log('ERROR:', err));
 
-//get all available local numbers
+//get all available local numbers example
 vClient
-  .call('listlocal', { state: 'OR', ratecenter: 'Florence' })
-  .then(response => console.log('subaccounts:', response.numbers.did))
+  .call('listlocal', {
+    state: 'OR',
+    ratecenter: 'Florence'
+  })
+  .then(response => console.log('subaccounts:', response))
   .catch(err => console.log('ERROR:', err));
