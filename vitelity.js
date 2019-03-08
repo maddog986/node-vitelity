@@ -5,6 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+//requirements
 const request = require('request'),
   xmlParser = require('xml2json');
 
@@ -19,6 +20,7 @@ module.exports = class Vitelity {
       }
     });
 
+    //base options
     this.opts = {
       host: 'api.vitelity.net/api.php',
       ...opts
@@ -36,11 +38,8 @@ module.exports = class Vitelity {
         cmd: opts.cmd,
         xml: opts.xml || 'yes',
         ...opts
-      },
-      json: true
+      }
     };
-
-    //console.log(options);
 
     return new Promise((res, rej) => request(options, (e, r) => (e ? rej(e) : r.body.error ? rej(r.body.error) : res(xmlParser.toJson(r.body, { object: true }).content))));
   }
